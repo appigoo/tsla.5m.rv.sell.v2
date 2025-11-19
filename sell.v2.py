@@ -351,7 +351,7 @@ all_signal_types = [
 selected_signals = st.multiselect(
     "选择哪些信号需要推送Telegram",
     all_signal_types,
-    default=["📈 SMA50上升趨勢", "📈 SMA50_200上升趨勢", "📈 EMA-SMA Uptrend Buy", "📉 烏雲蓋頂"]
+    default=["📉 新卖出信号"]
 )
 
 
@@ -1220,7 +1220,7 @@ while True:
                     
                         # 检查是否所有用户选中的信号都存在于K信号中
                         if all(signal in K_signals_list for signal in selected_signals):
-                            alertmsg = f"上升趨勢反轉,賣出訊號: {data['Datetime'].iloc[-1]} {ticker}:{selected_interval}:$ {data['Close'].iloc[-1].round(2)} *{data['異動標記'].iloc[-1]}*{data['成交量標記'].iloc[-1]}*{data['K線形態'].iloc[-1]}*{data['單根解讀'].iloc[-1]}* 同时出现全部信号 => {', '.join(selected_signals)}"
+                            alertmsg = f"V2趨勢反轉,賣出訊號: {data['Datetime'].iloc[-1]} {ticker}:{selected_interval}:$ {data['Close'].iloc[-1].round(2)} *{data['異動標記'].iloc[-1]}*{data['成交量標記'].iloc[-1]}*{data['K線形態'].iloc[-1]}*{data['單根解讀'].iloc[-1]}* 同时出现全部信号 => {', '.join(selected_signals)}"
                             send_telegram_alert(alertmsg)
                     ##########
                 # 添加 K 线图（含 EMA）、成交量柱状图和 RSI 子图（新增 VWAP/MFI/OBV traces）
